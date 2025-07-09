@@ -1,12 +1,12 @@
 //
 //  ContentView.swift
-//  RhythmHaptics
+//  RhythmHapticsWatch Watch App
 //
 //  Created by Dmitry Paranyushkin on 07/07/2025.
 //
 
 import SwiftUI
-import UIKit
+import WatchKit
 
 struct ContentView: View {
     var body: some View {
@@ -20,10 +20,9 @@ struct ContentView: View {
     }
 
     func playHapticRhythm() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
         for i in 0..<5 {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.3) {
-                generator.impactOccurred()
+                WKInterfaceDevice.current().play(.click)
             }
         }
     }

@@ -11,7 +11,36 @@
 		CEAD612B2E1C66350083F94D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD612A2E1C66350083F94D /* ContentView.swift */; };
 		CEAD612D2E1C66360083F94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD612C2E1C66360083F94D /* Assets.xcassets */; };
 		CEAD61302E1C66360083F94D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD612F2E1C66360083F94D /* Preview Assets.xcassets */; };
+		CEAD613D2E1C66670083F94D /* RhythmHapticsWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD613C2E1C66670083F94D /* RhythmHapticsWatchApp.swift */; };
+		CEAD613F2E1C66670083F94D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD613E2E1C66670083F94D /* ContentView.swift */; };
+		CEAD61412E1C66680083F94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD61402E1C66680083F94D /* Assets.xcassets */; };
+		CEAD61442E1C66680083F94D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD61432E1C66680083F94D /* Preview Assets.xcassets */; };
+		CEAD61472E1C66680083F94D /* RhythmHapticsWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEAD61452E1C66680083F94D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEAD611D2E1C66350083F94D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEAD61392E1C66670083F94D;
+			remoteInfo = "RhythmHapticsWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEAD614B2E1C66680083F94D /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				CEAD61472E1C66680083F94D /* RhythmHapticsWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CEAD61252E1C66350083F94D /* RhythmHaptics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RhythmHaptics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -19,10 +48,22 @@
 		CEAD612A2E1C66350083F94D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CEAD612C2E1C66360083F94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEAD612F2E1C66360083F94D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RhythmHapticsWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAD613C2E1C66670083F94D /* RhythmHapticsWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmHapticsWatchApp.swift; sourceTree = "<group>"; };
+		CEAD613E2E1C66670083F94D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CEAD61402E1C66680083F94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEAD61432E1C66680083F94D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CEAD61222E1C66350083F94D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEAD61372E1C66670083F94D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAD61272E1C66350083F94D /* RhythmHaptics */,
+				CEAD613B2E1C66670083F94D /* RhythmHapticsWatch Watch App */,
 				CEAD61262E1C66350083F94D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAD61252E1C66350083F94D /* RhythmHaptics.app */,
+				CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +110,25 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		CEAD613B2E1C66670083F94D /* RhythmHapticsWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD613C2E1C66670083F94D /* RhythmHapticsWatchApp.swift */,
+				CEAD613E2E1C66670083F94D /* ContentView.swift */,
+				CEAD61402E1C66680083F94D /* Assets.xcassets */,
+				CEAD61422E1C66680083F94D /* Preview Content */,
+			);
+			path = "RhythmHapticsWatch Watch App";
+			sourceTree = "<group>";
+		};
+		CEAD61422E1C66680083F94D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CEAD61432E1C66680083F94D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,14 +139,33 @@
 				CEAD61212E1C66350083F94D /* Sources */,
 				CEAD61222E1C66350083F94D /* Frameworks */,
 				CEAD61232E1C66350083F94D /* Resources */,
+				CEAD614B2E1C66680083F94D /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEAD61462E1C66680083F94D /* PBXTargetDependency */,
+			);
+			name = RhythmHaptics;
+			productName = RhythmHaptics;
+			productReference = CEAD61252E1C66350083F94D /* RhythmHaptics.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEAD61392E1C66670083F94D /* RhythmHapticsWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEAD61482E1C66680083F94D /* Build configuration list for PBXNativeTarget "RhythmHapticsWatch Watch App" */;
+			buildPhases = (
+				CEAD61362E1C66670083F94D /* Sources */,
+				CEAD61372E1C66670083F94D /* Frameworks */,
+				CEAD61382E1C66670083F94D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = RhythmHaptics;
-			productName = RhythmHaptics;
-			productReference = CEAD61252E1C66350083F94D /* RhythmHaptics.app */;
+			name = "RhythmHapticsWatch Watch App";
+			productName = "RhythmHapticsWatch Watch App";
+			productReference = CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,6 +179,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					CEAD61242E1C66350083F94D = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					CEAD61392E1C66670083F94D = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -116,6 +200,7 @@
 			projectRoot = "";
 			targets = (
 				CEAD61242E1C66350083F94D /* RhythmHaptics */,
+				CEAD61392E1C66670083F94D /* RhythmHapticsWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -127,6 +212,15 @@
 			files = (
 				CEAD61302E1C66360083F94D /* Preview Assets.xcassets in Resources */,
 				CEAD612D2E1C66360083F94D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEAD61382E1C66670083F94D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAD61442E1C66680083F94D /* Preview Assets.xcassets in Resources */,
+				CEAD61412E1C66680083F94D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +236,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CEAD61362E1C66670083F94D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEAD613F2E1C66670083F94D /* ContentView.swift in Sources */,
+				CEAD613D2E1C66670083F94D /* RhythmHapticsWatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEAD61462E1C66680083F94D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEAD61392E1C66670083F94D /* RhythmHapticsWatch Watch App */;
+			targetProxy = CEAD61452E1C66680083F94D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CEAD61312E1C66360083F94D /* Debug */ = {
@@ -267,6 +378,7 @@
 		CEAD61342E1C66360083F94D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -296,6 +408,7 @@
 		CEAD61352E1C66360083F94D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -322,6 +435,68 @@
 			};
 			name = Release;
 		};
+		CEAD61492E1C66680083F94D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RhythmHapticsWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 23275M22RH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RhythmHapticsWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Nodus-Labs.RhythmHaptics";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Nodus-Labs.RhythmHaptics.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		CEAD614A2E1C66680083F94D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RhythmHapticsWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 23275M22RH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = RhythmHapticsWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Nodus-Labs.RhythmHaptics";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Nodus-Labs.RhythmHaptics.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +514,15 @@
 			buildConfigurations = (
 				CEAD61342E1C66360083F94D /* Debug */,
 				CEAD61352E1C66360083F94D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEAD61482E1C66680083F94D /* Build configuration list for PBXNativeTarget "RhythmHapticsWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEAD61492E1C66680083F94D /* Debug */,
+				CEAD614A2E1C66680083F94D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
