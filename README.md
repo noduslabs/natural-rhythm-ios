@@ -6,10 +6,20 @@ It works by generating a fractal time series using the Fourier filtering method 
 
 This app was developed by [Dmitry Paranyushkin](https://paranyushkin.com/), the founder of [Nodus Labs](https://noduslabs.com).
 
-## Features
+## How to Use
 
-- Tap to Feel the Fractal
-- Stop and Start the rhythm
+- Find a Moment
+- Open the App
+- Tap to Feel the Rhythm
+- Synchronize with Natural Fractal Time Series
+
+## Benefits
+
+- Connect to nature
+- Increase resilience
+- Increase adaptivity
+- Increase sensitivity to different scales
+- Regenerate your body's natural rhythm
 
 ## Installation
 
