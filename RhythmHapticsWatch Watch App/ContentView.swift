@@ -39,7 +39,7 @@ struct ContentView: View {
                 let expectedTime = intervals.prefix(currentIndex).reduce(0, +)
                 
                 if elapsed >= expectedTime {
-                    WKInterfaceDevice.current().play(.notification)
+                    WKInterfaceDevice.current().play(.retry)
                     currentIndex += 1
                 }
             } else {
