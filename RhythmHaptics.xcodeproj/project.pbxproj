@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE84C6582E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84C6562E1FE46200F25FCE /* FractalSignalGenerator.swift */; };
+		CE84C6592E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84C6562E1FE46200F25FCE /* FractalSignalGenerator.swift */; };
 		CEAD61292E1C66350083F94D /* RhythmHapticsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD61282E1C66350083F94D /* RhythmHapticsApp.swift */; };
 		CEAD612B2E1C66350083F94D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAD612A2E1C66350083F94D /* ContentView.swift */; };
 		CEAD612D2E1C66360083F94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD612C2E1C66360083F94D /* Assets.xcassets */; };
@@ -43,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CE84C6562E1FE46200F25FCE /* FractalSignalGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractalSignalGenerator.swift; sourceTree = "<group>"; };
 		CEAD61252E1C66350083F94D /* RhythmHaptics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RhythmHaptics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEAD61282E1C66350083F94D /* RhythmHapticsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhythmHapticsApp.swift; sourceTree = "<group>"; };
 		CEAD612A2E1C66350083F94D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE84C6572E1FE46200F25FCE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CE84C6562E1FE46200F25FCE /* FractalSignalGenerator.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		CEAD611C2E1C66350083F94D = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +105,7 @@
 		CEAD61272E1C66350083F94D /* RhythmHaptics */ = {
 			isa = PBXGroup;
 			children = (
+				CE84C6572E1FE46200F25FCE /* Shared */,
 				CEAD61282E1C66350083F94D /* RhythmHapticsApp.swift */,
 				CEAD612A2E1C66350083F94D /* ContentView.swift */,
 				CEAD612C2E1C66360083F94D /* Assets.xcassets */,
@@ -231,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE84C6582E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */,
 				CEAD612B2E1C66350083F94D /* ContentView.swift in Sources */,
 				CEAD61292E1C66350083F94D /* RhythmHapticsApp.swift in Sources */,
 			);
@@ -240,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE84C6592E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */,
 				CEAD613F2E1C66670083F94D /* ContentView.swift in Sources */,
 				CEAD613D2E1C66670083F94D /* RhythmHapticsWatchApp.swift in Sources */,
 			);
