@@ -9,6 +9,8 @@ import SwiftUI
 import UIKit
 
 struct ContentView: View {
+    @State private var timer: Timer?
+    
     var body: some View {
         VStack {
             Text("Tap for Haptic Rhythm")
@@ -20,16 +22,31 @@ struct ContentView: View {
     }
 
     func playHapticRhythm() {
+        // Stop any existing timer
+        timer?.invalidate()
+        
         let generator = UIImpactFeedbackGenerator(style: .heavy)
-        let intervals = generateFractalSignal(length: 128, hurst: 1)
-        var currentTime: Double = 0
-        for interval in intervals {
-            let delay = currentTime
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                generator.impactOccurred()
+        let rawIntervals = generateFractalSignal(length: 128, hurst: 1)
+        let intervals = rawIntervals.map { 0.2 + $0 * 0.4 } // scale to [0.2, 0.6]
+        
+        var currentIndex = 0
+        let startTime = Date()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
+            let elapsed = Date().timeIntervalSince(startTime)
+            
+            if currentIndex < intervals.count {
+                let expectedTime = intervals.prefix(currentIndex).reduce(0, +)
+                
+                if elapsed >= expectedTime {
+                    generator.impactOccurred()
+                    currentIndex += 1
+                }
+            } else {
+                // All haptics completed
+                timer?.invalidate()
+                timer = nil
             }
-            // Scale interval to a practical range, e.g. 0.2–0.8 seconds
-            currentTime += 0.2 + interval * 0.6
         }
     }
 }
