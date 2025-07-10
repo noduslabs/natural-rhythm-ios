@@ -10,12 +10,17 @@ import UIKit
 
 struct ContentView: View {
     @State private var timer: Timer?
+    @State private var isPlaying = false
     
     var body: some View {
         VStack {
-            Text("Tap for Haptic Rhythm")
-            Button("Start Rhythm") {
-                playHapticRhythm()
+            Text("Tap to Feel the Fractal")
+            Button(isPlaying ? "Stop" : "Start") {
+                if isPlaying {
+                    stopHapticRhythm()
+                } else {
+                    playHapticRhythm()
+                }
             }
             .padding()
         }
@@ -24,6 +29,8 @@ struct ContentView: View {
     func playHapticRhythm() {
         // Stop any existing timer
         timer?.invalidate()
+        
+        isPlaying = true
         
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         let rawIntervals = generateFractalSignal(length: 128, hurst: 1)
@@ -44,9 +51,14 @@ struct ContentView: View {
                 }
             } else {
                 // All haptics completed
-                timer?.invalidate()
-                timer = nil
+                stopHapticRhythm()
             }
         }
+    }
+    
+    func stopHapticRhythm() {
+        timer?.invalidate()
+        timer = nil
+        isPlaying = false
     }
 }

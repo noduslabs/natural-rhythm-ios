@@ -11,12 +11,17 @@ import WatchKit
 
 struct ContentView: View {
     @State private var timer: Timer?
+    @State private var isPlaying = false
     
     var body: some View {
         VStack {
-            Text("Tap for Haptic Rhythm")
-            Button("Start Rhythm") {
-                playHapticRhythm()
+            Text("Tap to Feel the Fractal")
+            Button(isPlaying ? "Stop" : "Start") {
+                if isPlaying {
+                    stopHapticRhythm()
+                } else {
+                    playHapticRhythm()
+                }
             }
             .padding()
         }
@@ -25,6 +30,8 @@ struct ContentView: View {
     func playHapticRhythm() {
         // Stop any existing timer
         timer?.invalidate()
+        
+        isPlaying = true
         
         let rawIntervals = generateFractalSignal(length: 128, hurst: 1)
         let intervals = rawIntervals.map { 0.2 + $0 * 0.4 } // scale to [0.2, 0.6]
@@ -44,9 +51,14 @@ struct ContentView: View {
                 }
             } else {
                 // All haptics completed
-                timer?.invalidate()
-                timer = nil
+                stopHapticRhythm()
             }
         }
+    }
+    
+    func stopHapticRhythm() {
+        timer?.invalidate()
+        timer = nil
+        isPlaying = false
     }
 }
