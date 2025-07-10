@@ -67,7 +67,7 @@ struct ContentView: View {
                 let expectedTime = intervals.prefix(currentIndex).reduce(0, +)
                 
                 if elapsed >= expectedTime {
-                    WKInterfaceDevice.current().play(.failure)
+                    WKInterfaceDevice.current().play(.start) // success is double but nice, failure is longer vibration
                     currentIndex += 1
                 }
             } else {
