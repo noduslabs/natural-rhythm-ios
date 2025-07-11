@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import UIKit
 
 struct ContentView: View {
     @State private var timer: Timer?
@@ -31,10 +32,20 @@ struct ContentView: View {
         timer?.invalidate()
         
         isPlaying = true
+        UIApplication.shared.isIdleTimerDisabled = true // Keep screen on
         
         let generator = UIImpactFeedbackGenerator(style: .heavy)
-        let rawIntervals = generateFractalSignal(length: 128, hurst: 1)
-        let intervals = rawIntervals.map { 0.2 + $0 * 0.4 } // scale to [0.2, 0.6]
+        let rawIntervals = generateFractalSignal(length: 256, hurst: 1.1)
+        let intervals: [Double] = rawIntervals.map { 0.1 + $0 * 2 }
+//        var pairSums: [Double] = []
+//        pairSums.reserveCapacity(intervals.count / 2 + intervals.count % 2)
+//        for i in stride(from: 0, to: intervals.count, by: 2) {
+//            let sum = intervals[i] + (i + 1 < intervals.count ? intervals[i + 1] : 0)
+//            pairSums.append(sum)
+//        }
+//        print("Pair sums: \(pairSums.map { String(format: "%.4f", $0) }.joined(separator: ", "))")
+
+        
         
         var currentIndex = 0
         let startTime = Date()
@@ -60,5 +71,6 @@ struct ContentView: View {
         timer?.invalidate()
         timer = nil
         isPlaying = false
+        UIApplication.shared.isIdleTimerDisabled = false // Allow screen to sleep
     }
 }

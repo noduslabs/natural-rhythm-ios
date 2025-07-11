@@ -7,14 +7,19 @@
 
 import SwiftUI
 import WatchKit
+import HealthKit
 
 
 struct ContentView: View {
+    @StateObject private var workoutManager = WorkoutManager()
     @State private var timer: Timer?
     @State private var isPlaying = false
     @State private var isStarting = false
     
     var body: some View {
+        VStack {
+        }
+        .privacySensitive(false) // Allows always-on display support
         VStack {
             Text("Tap to Feel the Fractal")
             Button(buttonText) {
@@ -25,6 +30,9 @@ struct ContentView: View {
                 }
             }
             .padding()
+        }
+        .onAppear {
+            workoutManager.requestAuthorization { _ in }
         }
     }
     
@@ -40,7 +48,8 @@ struct ContentView: View {
 
     func startHapticRhythm() {
         isStarting = true
-        
+        SessionManager.shared.startSession() // Start extended runtime session
+        workoutManager.startWorkout() // Start workout session for always-on
         // Use a brief delay to show "Starting" before actually starting
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             playHapticRhythm()
@@ -54,8 +63,8 @@ struct ContentView: View {
         isStarting = false
         isPlaying = true
         
-        let rawIntervals = generateFractalSignal(length: 128, hurst: 1)
-        let intervals = rawIntervals.map { 0.2 + $0 * 0.4 } // scale to [0.2, 0.6]
+        let rawIntervals = generateFractalSignal(length: 256, hurst: 1.1)
+        let intervals = rawIntervals.map { 0.1 + $0 * 2 } // scale to [0.2, 0.6] 0.2 $0 * 0.4 will be faster
         
         var currentIndex = 0
         let startTime = Date()
@@ -81,6 +90,8 @@ struct ContentView: View {
         timer?.invalidate()
         timer = nil
         isPlaying = false
+        SessionManager.shared.stopSession() // Stop extended runtime session
+        workoutManager.stopWorkout() // Stop workout session
         isStarting = false
     }
 }
