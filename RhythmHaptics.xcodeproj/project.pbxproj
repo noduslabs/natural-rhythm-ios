@@ -63,6 +63,7 @@
 		CEAD61402E1C66680083F94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEAD61432E1C66680083F94D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CEBBC5242E22C70B001F0BC1 /* beat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beat.wav; sourceTree = "<group>"; };
+		CEBBC5262E22C7C2001F0BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +113,7 @@
 		CEAD61272E1C66350083F94D /* RhythmHaptics */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBC5262E22C7C2001F0BC1 /* Info.plist */,
 				CEBBC5242E22C70B001F0BC1 /* beat.wav */,
 				CE84C6572E1FE46200F25FCE /* Shared */,
 				CEAD61282E1C66350083F94D /* RhythmHapticsApp.swift */,
@@ -415,6 +417,7 @@
 				DEVELOPMENT_TEAM = 23275M22RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RhythmHaptics/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -445,6 +448,7 @@
 				DEVELOPMENT_TEAM = 23275M22RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RhythmHaptics/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

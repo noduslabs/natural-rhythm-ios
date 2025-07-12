@@ -10,6 +10,15 @@ import UIKit
 import AVFoundation
 
 struct ContentView: View {
+    init() {
+        // Set up audio session for background playback
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set up AVAudioSession: \(error)")
+        }
+    }
     @State private var timer: Timer?
     @State private var isPlaying = false
     @State private var audioPlayer: AVAudioPlayer?
