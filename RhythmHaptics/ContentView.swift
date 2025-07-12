@@ -7,11 +7,12 @@
 
 import SwiftUI
 import UIKit
-import UIKit
+import AVFoundation
 
 struct ContentView: View {
     @State private var timer: Timer?
     @State private var isPlaying = false
+    @State private var audioPlayer: AVAudioPlayer?
     
     var body: some View {
         VStack {
@@ -28,6 +29,15 @@ struct ContentView: View {
     }
 
     func playHapticRhythm() {
+        // Prepare audio player
+        if let soundURL = Bundle.main.url(forResource: "beat", withExtension: "wav") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+            } catch {
+                print("Error loading sound: \(error)")
+            }
+        }
         // Stop any existing timer
         timer?.invalidate()
         
@@ -58,6 +68,7 @@ struct ContentView: View {
                 
                 if elapsed >= expectedTime {
                     generator.impactOccurred()
+                    audioPlayer?.play()
                     currentIndex += 1
                 }
             } else {

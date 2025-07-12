@@ -20,6 +20,7 @@
 		CEAD61412E1C66680083F94D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD61402E1C66680083F94D /* Assets.xcassets */; };
 		CEAD61442E1C66680083F94D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD61432E1C66680083F94D /* Preview Assets.xcassets */; };
 		CEAD61472E1C66680083F94D /* RhythmHapticsWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CEBBC5252E22C70B001F0BC1 /* beat.wav in Resources */ = {isa = PBXBuildFile; fileRef = CEBBC5242E22C70B001F0BC1 /* beat.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		CEAD613E2E1C66670083F94D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CEAD61402E1C66680083F94D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEAD61432E1C66680083F94D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEBBC5242E22C70B001F0BC1 /* beat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beat.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		CEAD61272E1C66350083F94D /* RhythmHaptics */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBC5242E22C70B001F0BC1 /* beat.wav */,
 				CE84C6572E1FE46200F25FCE /* Shared */,
 				CEAD61282E1C66350083F94D /* RhythmHapticsApp.swift */,
 				CEAD612A2E1C66350083F94D /* ContentView.swift */,
@@ -230,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBBC5252E22C70B001F0BC1 /* beat.wav in Resources */,
 				CEAD61302E1C66360083F94D /* Preview Assets.xcassets in Resources */,
 				CEAD612D2E1C66360083F94D /* Assets.xcassets in Resources */,
 			);
