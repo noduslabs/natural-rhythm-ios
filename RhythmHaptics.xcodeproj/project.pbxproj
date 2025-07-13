@@ -21,6 +21,10 @@
 		CEAD61442E1C66680083F94D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEAD61432E1C66680083F94D /* Preview Assets.xcassets */; };
 		CEAD61472E1C66680083F94D /* RhythmHapticsWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = CEAD613A2E1C66670083F94D /* RhythmHapticsWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CEBBC5252E22C70B001F0BC1 /* beat.wav in Resources */ = {isa = PBXBuildFile; fileRef = CEBBC5242E22C70B001F0BC1 /* beat.wav */; };
+		CEBBC52E2E2455EA001F0BC1 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBC52D2E2455EA001F0BC1 /* SettingsModel.swift */; };
+		CEBBC52F2E2455EA001F0BC1 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBC52D2E2455EA001F0BC1 /* SettingsModel.swift */; };
+		CEBBC5312E2455F4001F0BC1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBC5302E2455F4001F0BC1 /* SettingsView.swift */; };
+		CEBBC5332E2455FD001F0BC1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBBC5322E2455FD001F0BC1 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,9 @@
 		CEAD61432E1C66680083F94D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CEBBC5242E22C70B001F0BC1 /* beat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beat.wav; sourceTree = "<group>"; };
 		CEBBC5262E22C7C2001F0BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CEBBC52D2E2455EA001F0BC1 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		CEBBC5302E2455F4001F0BC1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		CEBBC5322E2455FD001F0BC1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +94,7 @@
 		CE84C6572E1FE46200F25FCE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBC52D2E2455EA001F0BC1 /* SettingsModel.swift */,
 				CE84C6562E1FE46200F25FCE /* FractalSignalGenerator.swift */,
 			);
 			path = Shared;
@@ -113,6 +121,7 @@
 		CEAD61272E1C66350083F94D /* RhythmHaptics */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBC5302E2455F4001F0BC1 /* SettingsView.swift */,
 				CEBBC5262E22C7C2001F0BC1 /* Info.plist */,
 				CEBBC5242E22C70B001F0BC1 /* beat.wav */,
 				CE84C6572E1FE46200F25FCE /* Shared */,
@@ -135,6 +144,7 @@
 		CEAD613B2E1C66670083F94D /* RhythmHapticsWatch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBC5322E2455FD001F0BC1 /* SettingsView.swift */,
 				CE5009882E217CBC00AFDAC5 /* RhythmHapticsWatch Watch App.entitlements */,
 				CE5009862E2178EB00AFDAC5 /* WorkoutManager.swift */,
 				CE5009842E21756900AFDAC5 /* SessionManager.swift */,
@@ -257,6 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBBC5312E2455F4001F0BC1 /* SettingsView.swift in Sources */,
+				CEBBC52F2E2455EA001F0BC1 /* SettingsModel.swift in Sources */,
 				CE84C6582E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */,
 				CEAD612B2E1C66350083F94D /* ContentView.swift in Sources */,
 				CEAD61292E1C66350083F94D /* RhythmHapticsApp.swift in Sources */,
@@ -267,6 +279,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBBC5332E2455FD001F0BC1 /* SettingsView.swift in Sources */,
+				CEBBC52E2E2455EA001F0BC1 /* SettingsModel.swift in Sources */,
 				CE84C6592E1FE46200F25FCE /* FractalSignalGenerator.swift in Sources */,
 				CEAD613F2E1C66670083F94D /* ContentView.swift in Sources */,
 				CE5009872E2178EB00AFDAC5 /* WorkoutManager.swift in Sources */,

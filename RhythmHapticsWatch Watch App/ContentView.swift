@@ -15,21 +15,34 @@ struct ContentView: View {
     @State private var timer: Timer?
     @State private var isPlaying = false
     @State private var isStarting = false
+    @ObservedObject private var settings = SettingsModel.shared
     
     var body: some View {
-        VStack {
-        }
-        .privacySensitive(false) // Allows always-on display support
-        VStack {
-            Text("Tap to Feel the Fractal")
-            Button(buttonText) {
-                if isPlaying {
-                    stopHapticRhythm()
-                } else {
-                    startHapticRhythm()
+        NavigationView {
+            VStack {
+                Text("Tap to Feel the Fractal")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom)
+                
+                Button(buttonText) {
+                    if isPlaying {
+                        stopHapticRhythm()
+                    } else {
+                        startHapticRhythm()
+                    }
                 }
+                .buttonStyle(BorderedProminentButtonStyle())
+                .padding()
+                
+                NavigationLink("Settings") {
+                    SettingsView()
+                }
+                .buttonStyle(BorderedButtonStyle())
             }
-            .padding()
+            .privacySensitive(false)
+            .navigationTitle("RhythmHaptics")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             workoutManager.requestAuthorization { _ in }
@@ -63,8 +76,8 @@ struct ContentView: View {
         isStarting = false
         isPlaying = true
         
-        let rawIntervals = generateFractalSignal(length: 256, hurst: 1.1)
-        let intervals = rawIntervals.map { 0.1 + $0 * 2 } // scale to [0.2, 0.6] 0.2 $0 * 0.4 will be faster
+        let rawIntervals = generateFractalSignal(length: settings.signalLength, hurst: settings.hurstParameter)
+        let intervals = rawIntervals.map { settings.baseInterval + $0 * settings.intensityMultiplier }
         
         var currentIndex = 0
         let startTime = Date()

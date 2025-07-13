@@ -22,18 +22,29 @@ struct ContentView: View {
     @State private var timer: Timer?
     @State private var isPlaying = false
     @State private var audioPlayer: AVAudioPlayer?
+    @State private var showingSettings = false
+    @ObservedObject private var settings = SettingsModel.shared
     
     var body: some View {
-        VStack {
-            Text("Tap to Feel the Fractal")
-            Button(isPlaying ? "Stop" : "Start") {
-                if isPlaying {
-                    stopHapticRhythm()
-                } else {
-                    playHapticRhythm()
+        NavigationView {
+            VStack {
+                Text("Tap to Feel the Fractal")
+                Button(isPlaying ? "Stop" : "Start") {
+                    if isPlaying {
+                        stopHapticRhythm()
+                    } else {
+                        playHapticRhythm()
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .navigationTitle("RhythmHaptics")
+            .navigationBarItems(trailing: Button("Settings") {
+                showingSettings = true
+            })
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
+            }
         }
     }
 
@@ -53,9 +64,10 @@ struct ContentView: View {
         isPlaying = true
         UIApplication.shared.isIdleTimerDisabled = true // Keep screen on
         
-        let generator = UIImpactFeedbackGenerator(style: .heavy)
-        let rawIntervals = generateFractalSignal(length: 256, hurst: 1.1)
-        let intervals: [Double] = rawIntervals.map { 0.1 + $0 * 2 }
+        let hapticStyles: [UIImpactFeedbackGenerator.FeedbackStyle] = [.light, .medium, .heavy]
+        let generator = UIImpactFeedbackGenerator(style: hapticStyles[settings.hapticStyle])
+        let rawIntervals = generateFractalSignal(length: settings.signalLength, hurst: settings.hurstParameter)
+        let intervals: [Double] = rawIntervals.map { settings.baseInterval + $0 * settings.intensityMultiplier }
         var pairSums: [Double] = []
         pairSums.reserveCapacity(intervals.count / 2 + intervals.count % 2)
         for i in stride(from: 0, to: intervals.count, by: 2) {
