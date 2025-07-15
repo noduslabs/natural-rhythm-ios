@@ -59,6 +59,11 @@ struct SettingsView: View {
                                 .foregroundColor(.secondary)
                         }
                         Slider(value: $settings.intensityMultiplier, in: 0.25...10.0, step: 0.25)
+                            .onChange(of: settings.intensityMultiplier) { newValue in
+                                if newValue < 1.0 {
+                                    settings.extendedHapticFeedback = false
+                                }
+                            }
                     }
                 }
                 
@@ -77,6 +82,13 @@ struct SettingsView: View {
                         Text("Click").tag(3)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    
+                    HStack {
+                        Text("Extended Feedback")
+                        Spacer()
+                        Toggle("", isOn: $settings.extendedHapticFeedback)
+                            .disabled(settings.intensityMultiplier < 1.0)
+                    }
                 }
                 
                 Section(header: Text("About")) {

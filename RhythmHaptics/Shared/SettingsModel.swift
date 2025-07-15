@@ -52,6 +52,12 @@ class SettingsModel: ObservableObject {
         }
     }
     
+    @Published var extendedHapticFeedback: Bool {
+        didSet {
+            UserDefaults.standard.set(extendedHapticFeedback, forKey: "extendedHapticFeedback")
+        }
+    }
+    
     private init() {
         self.hurstParameter = UserDefaults.standard.object(forKey: "hurstParameter") as? Double ?? 1.1
         self.signalLength = UserDefaults.standard.object(forKey: "signalLength") as? Int ?? 256
@@ -60,5 +66,6 @@ class SettingsModel: ObservableObject {
         self.hapticStyle = UserDefaults.standard.object(forKey: "hapticStyle") as? Int ?? 0
         self.soundType = UserDefaults.standard.object(forKey: "soundType") as? Int ?? 0
         self.signalType = UserDefaults.standard.object(forKey: "signalType") as? Int ?? 0
+        self.extendedHapticFeedback = UserDefaults.standard.object(forKey: "extendedHapticFeedback") as? Bool ?? false
     }
 }

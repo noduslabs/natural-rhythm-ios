@@ -39,6 +39,11 @@ struct SettingsView: View {
                 Text("Multiplier: \(settings.intensityMultiplier, specifier: "%.1f")")
                     .font(.caption)
                 Slider(value: $settings.intensityMultiplier, in: 0.25...10.0, step: 0.25)
+                    .onChange(of: settings.intensityMultiplier) { newValue in
+                        if newValue < 1.0 {
+                            settings.extendedHapticFeedback = false
+                        }
+                    }
             }
             
             VStack(alignment: .leading, spacing: 8) {
@@ -93,6 +98,14 @@ struct SettingsView: View {
                     .background(settings.signalType == 2 ? Color.accentColor : Color.clear)
                     .font(.caption2)
                 }
+            }
+            
+            HStack {
+                Text("Extended Feedback")
+                    .font(.caption)
+                Spacer()
+                Toggle("", isOn: $settings.extendedHapticFeedback)
+                    .disabled(settings.intensityMultiplier < 1.0)
             }
             
             Button("Done") {
