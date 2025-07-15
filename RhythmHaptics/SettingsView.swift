@@ -58,7 +58,7 @@ struct SettingsView: View {
                             Text("\(settings.intensityMultiplier, specifier: "%.1f")")
                                 .foregroundColor(.secondary)
                         }
-                        Slider(value: $settings.intensityMultiplier, in: 0.5...5.0, step: 0.5)
+                        Slider(value: $settings.intensityMultiplier, in: 0.25...10.0, step: 0.25)
                     }
                 }
                 

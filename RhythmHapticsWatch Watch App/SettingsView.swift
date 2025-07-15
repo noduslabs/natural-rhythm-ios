@@ -17,7 +17,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Hurst: \(settings.hurstParameter, specifier: "%.1f")")
                     .font(.caption)
-                Slider(value: $settings.hurstParameter, in: 0.5...2.0, step: 0.1)
+                Slider(value: $settings.hurstParameter, in: 0.2...2.0, step: 0.1)
             }
             
             VStack(alignment: .leading, spacing: 4) {
@@ -38,7 +38,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("Multiplier: \(settings.intensityMultiplier, specifier: "%.1f")")
                     .font(.caption)
-                Slider(value: $settings.intensityMultiplier, in: 0.5...5.0, step: 0.5)
+                Slider(value: $settings.intensityMultiplier, in: 0.25...10.0, step: 0.25)
             }
             
             VStack(alignment: .leading, spacing: 8) {
