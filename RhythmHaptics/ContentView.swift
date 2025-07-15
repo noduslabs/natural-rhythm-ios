@@ -35,6 +35,15 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                // Visual feedback square (background layer)
+                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
+                    Rectangle()
+                        .fill(Color.primary.opacity(1))
+                        .frame(width: squareSize, height: squareSize)
+                        .animation(.linear(duration: 0.1), value: squareSize)
+                }
+                
+                // UI content (foreground layer)
                 VStack {
                     Text("Tap to Feel the Fractal")
                     Button(isPlaying ? "Stop" : "Start") {
@@ -52,14 +61,6 @@ struct ContentView: View {
                 })
                 .sheet(isPresented: $showingSettings) {
                     SettingsView()
-                }
-                
-                // Visual feedback square
-                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
-                    Rectangle()
-                        .fill(Color.blue.opacity(0.3))
-                        .frame(width: squareSize, height: squareSize)
-                        .animation(.linear(duration: 0.1), value: squareSize)
                 }
             }
         }
@@ -92,7 +93,7 @@ struct ContentView: View {
             let sum = intervals[i] + (i + 1 < intervals.count ? intervals[i + 1] : 0)
             pairSums.append(sum)
         }
-        print("Pair sums: \(pairSums.map { String(format: "%.4f", $0) }.joined(separator: ", "))")
+        print("Intervals: \(intervals.map { String(format: "%.4f", $0) }.joined(separator: ", "))")
 
         
         
@@ -127,7 +128,7 @@ struct ContentView: View {
     
     func playExtendedHapticPattern(for interval: Double, startTime: Double) {
         // Generate more impulses with gradual acceleration-deceleration
-        let totalHaptics = max(7, Int(interval * 12)) // More haptics
+        let totalHaptics = max(8, Int(interval * 12)) // More haptics
         let maxHaptics = 8 // Increased cap
         let actualHaptics = min(totalHaptics, maxHaptics)
         

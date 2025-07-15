@@ -25,6 +25,15 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                // Visual feedback square (background layer)
+                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
+                    Rectangle()
+                        .fill(Color.primary.opacity(1))
+                        .frame(width: squareSize, height: squareSize)
+                        .animation(.linear(duration: 0.1), value: squareSize)
+                }
+                
+                // UI content (foreground layer)
                 VStack {
                     Text("Tap to Feel the Fractal")
                         .font(.headline)
@@ -49,14 +58,6 @@ struct ContentView: View {
                 .privacySensitive(false)
                 .navigationTitle("RhythmHaptics")
                 .navigationBarTitleDisplayMode(.inline)
-                
-                // Visual feedback square
-                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
-                    Rectangle()
-                        .fill(Color.blue.opacity(0.3))
-                        .frame(width: squareSize, height: squareSize)
-                        .animation(.linear(duration: 0.1), value: squareSize)
-                }
             }
         }
         .onAppear {
@@ -129,7 +130,7 @@ struct ContentView: View {
     
     func playExtendedHapticPattern(for interval: Double, startTime: Double) {
         // Generate more impulses with gradual acceleration-deceleration
-        let totalHaptics = max(7, Int(interval * 12)) // More haptics
+        let totalHaptics = max(8, Int(interval * 12)) // More haptics
         let maxHaptics = 8 // Increased cap
         let actualHaptics = min(totalHaptics, maxHaptics)
         
