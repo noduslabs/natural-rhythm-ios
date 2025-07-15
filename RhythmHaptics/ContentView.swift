@@ -37,9 +37,9 @@ struct ContentView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    // Visual feedback square (background layer - absolutely positioned)
+                    // Visual feedback circle (background layer - absolutely positioned)
                     if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
-                        Rectangle()
+                        Circle()
                             .fill(Color.primary.opacity(1))
                             .frame(width: squareSize, height: squareSize)
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
