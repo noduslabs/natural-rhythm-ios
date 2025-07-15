@@ -122,7 +122,7 @@ struct ContentView: View {
         isPlaying = true
         
         // Reset visual feedback state
-        squareSize = 0
+        squareSize = 60 // Start at button size
         intervalCount = 0
         isGrowing = true
         
@@ -159,8 +159,8 @@ struct ContentView: View {
     
     func playExtendedHapticPattern(for interval: Double, startTime: Double) {
         // Generate more impulses with gradual acceleration-deceleration
-        let totalHaptics = max(8, Int(interval * 12)) // More haptics
-        let maxHaptics = 8 // Increased cap
+        let totalHaptics = max(16, Int(interval * 12)) // More haptics
+        let maxHaptics = 16 // Increased cap
         let actualHaptics = min(totalHaptics, maxHaptics)
         
         var delays: [Double] = []
@@ -213,25 +213,28 @@ struct ContentView: View {
         for (index, delay) in delays.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 if self.isPlaying {
-                    // Update visual feedback
+                    // Update visual feedback (always)
                     let progress = Double(index) / Double(delays.count - 1)
+                    let buttonSize: CGFloat = 60 // Match play button size
                     if self.isGrowing {
-                        self.squareSize = CGFloat(progress) * screenSize
+                        self.squareSize = buttonSize + CGFloat(progress) * (screenSize - buttonSize)
                     } else {
-                        self.squareSize = CGFloat(1.0 - progress) * screenSize
+                        self.squareSize = buttonSize + CGFloat(1.0 - progress) * (screenSize - buttonSize)
                     }
                     
-                    // Play haptic feedback
-                    if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
-                        if index == 0 {
-                            // First haptic uses different signal for cadence
-                            self.playSelectedSignal(soundType: 2)
+                    // Play haptic feedback only on index 0 and every second index (0, 2, 4, 6...)
+                    if index == 0 || index % 2 == 0 {
+                        if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
+                            if index == 0 {
+                                // First haptic uses different signal for cadence
+                                self.playSelectedSignal(soundType: 2)
+                            } else {
+                                // Subsequent haptics use regular signal
+                                self.playSelectedSignal()
+                            }
                         } else {
-                            // Subsequent haptics use regular signal
                             self.playSelectedSignal()
                         }
-                    } else {
-                        self.playSelectedSignal()
                     }
                 }
             }
@@ -260,7 +263,7 @@ struct ContentView: View {
         isStarting = false
         
         // Reset visual feedback state
-        squareSize = 0
+        squareSize = 60 // Start at button size
         intervalCount = 0
         isGrowing = true
     }

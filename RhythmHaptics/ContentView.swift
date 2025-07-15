@@ -126,7 +126,7 @@ struct ContentView: View {
         UIApplication.shared.isIdleTimerDisabled = true // Keep screen on
         
         // Reset visual feedback state
-        squareSize = 0
+        squareSize = 80 // Start at button size
         intervalCount = 0
         isGrowing = true
         
@@ -175,8 +175,8 @@ struct ContentView: View {
     
     func playExtendedHapticPattern(for interval: Double, startTime: Double) {
         // Generate more impulses with gradual acceleration-deceleration
-        let totalHaptics = max(8, Int(interval * 12)) // More haptics
-        let maxHaptics = 8 // Increased cap
+        let totalHaptics = max(16, Int(interval * 12)) // More haptics
+        let maxHaptics = 16 // Increased cap
         let actualHaptics = min(totalHaptics, maxHaptics)
         
         let hapticStyles: [UIImpactFeedbackGenerator.FeedbackStyle] = [.light, .medium, .heavy]
@@ -236,27 +236,30 @@ struct ContentView: View {
         for (index, delay) in delays.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 if self.isPlaying {
-                    // Update visual feedback
+                    // Update visual feedback (always)
                     let progress = Double(index) / Double(delays.count - 1)
+                    let buttonSize: CGFloat = 80 // Match play button size
                     if self.isGrowing {
-                        self.squareSize = CGFloat(progress) * screenSize
+                        self.squareSize = buttonSize + CGFloat(progress) * (screenSize - buttonSize)
                     } else {
-                        self.squareSize = CGFloat(1.0 - progress) * screenSize
+                        self.squareSize = buttonSize + CGFloat(1.0 - progress) * (screenSize - buttonSize)
                     }
                     
-                    // Play haptic feedback
-                    if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
-                        if index == 0 {
-                            generatorExtendedCadence.impactOccurred()
-                            self.playSelectedSound(soundType: 0)
-                        }
-                        else {
-                            generatorExtended.impactOccurred()
+                    // Play haptic feedback only on index 0 and every second index (0, 2, 4, 6...)
+                    if index == 0 || index % 2 == 0 {
+                        if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
+                            if index == 0 {
+                                generatorExtendedCadence.impactOccurred()
+                                self.playSelectedSound(soundType: 0)
+                            }
+                            else {
+                                generatorExtended.impactOccurred()
+                                self.playSelectedSound()
+                            }
+                        } else {
+                            generator.impactOccurred()
                             self.playSelectedSound()
                         }
-                    } else {
-                        generator.impactOccurred()
-                        self.playSelectedSound()
                     }
                 }
             }
@@ -292,7 +295,7 @@ struct ContentView: View {
         }
         
         // Reset visual feedback state
-        squareSize = 0
+        squareSize = 80 // Start at button size
         intervalCount = 0
         isGrowing = true
         isStarting = false
