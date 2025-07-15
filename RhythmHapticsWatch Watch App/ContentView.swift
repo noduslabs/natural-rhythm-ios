@@ -110,14 +110,14 @@ struct ContentView: View {
     func playExtendedHapticPattern(for interval: Double, startTime: Double) {
         // Generate more impulses with gradual acceleration-deceleration
         let totalHaptics = max(7, Int(interval * 12)) // More haptics
-        let maxHaptics = 15 // Increased cap
+        let maxHaptics = 8 // Increased cap
         let actualHaptics = min(totalHaptics, maxHaptics)
         
         var delays: [Double] = []
         delays.append(0.0) // First haptic at start
         
         var currentTime = 0.0
-        let totalAvailableTime = interval * 0.95 // Use 95% of interval
+        let totalAvailableTime = interval * 0.8 // Use 80% of interval
         
         // Pre-calculate all gap sizes to ensure we fill the available time
         var gapSizes: [Double] = []
@@ -153,17 +153,27 @@ struct ContentView: View {
         }
         
         // Schedule all haptics
-        for delay in delays {
+        for (index, delay) in delays.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 if self.isPlaying {
-                    self.playSelectedSignal()
+                    if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
+                        if index == 0 {
+                            // First haptic uses different signal for cadence
+                            self.playSelectedSignal(soundType: 2)
+                        } else {
+                            // Subsequent haptics use regular signal
+                            self.playSelectedSignal()
+                        }
+                    } else {
+                        self.playSelectedSignal()
+                    }
                 }
             }
         }
     }
     
-    func playSelectedSignal() {
-        switch settings.signalType {
+    func playSelectedSignal(soundType: Int? = nil) {
+        switch soundType ?? settings.signalType {
         case 0: // Start
             WKInterfaceDevice.current().play(.start)
         case 1: // Success
