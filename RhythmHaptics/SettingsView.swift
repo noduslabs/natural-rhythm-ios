@@ -69,6 +69,14 @@ struct SettingsView: View {
                         Text("Heavy").tag(2)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    
+                    Picker("Sound Type", selection: $settings.soundType) {
+                        Text("Beat").tag(0)
+                        Text("Lock").tag(1)
+                        Text("Tink").tag(2)
+                        Text("Click").tag(3)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
                 
                 Section(header: Text("About")) {

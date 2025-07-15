@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import AVFoundation
+import AudioToolbox
 
 struct ContentView: View {
     init() {
@@ -23,6 +24,7 @@ struct ContentView: View {
     @State private var isPlaying = false
     @State private var audioPlayer: AVAudioPlayer?
     @State private var showingSettings = false
+    @State private var customSoundID: SystemSoundID = 0
     @ObservedObject private var settings = SettingsModel.shared
     
     var body: some View {
@@ -49,15 +51,11 @@ struct ContentView: View {
     }
 
     func playHapticRhythm() {
-        // Prepare audio player
+        // Register custom sound
         if let soundURL = Bundle.main.url(forResource: "beat", withExtension: "wav") {
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-                audioPlayer?.prepareToPlay()
-            } catch {
-                print("Error loading sound: \(error)")
-            }
+            AudioServicesCreateSystemSoundID(soundURL as CFURL, &customSoundID)
         }
+        
         // Stop any existing timer
         timer?.invalidate()
         
@@ -89,7 +87,7 @@ struct ContentView: View {
                 
                 if elapsed >= expectedTime {
                     generator.impactOccurred()
-                    audioPlayer?.play()
+                    playSelectedSound()
                     currentIndex += 1
                 }
             } else {
@@ -99,10 +97,31 @@ struct ContentView: View {
         }
     }
     
+    func playSelectedSound() {
+        switch settings.soundType {
+        case 0: // Beat (custom sound)
+            AudioServicesPlaySystemSound(customSoundID)
+        case 1: // Lock
+            AudioServicesPlaySystemSound(1100)
+        case 2: // Tink
+            AudioServicesPlaySystemSound(1057)
+        case 3: // Click
+            AudioServicesPlaySystemSound(1104)
+        default:
+            AudioServicesPlaySystemSound(customSoundID)
+        }
+    }
+    
     func stopHapticRhythm() {
         timer?.invalidate()
         timer = nil
         isPlaying = false
         UIApplication.shared.isIdleTimerDisabled = false // Allow screen to sleep
+        
+        // Clean up custom sound
+        if customSoundID != 0 {
+            AudioServicesDisposeSystemSoundID(customSoundID)
+            customSoundID = 0
+        }
     }
 }
