@@ -48,7 +48,7 @@ struct SettingsView: View {
                             Text("\(settings.baseInterval, specifier: "%.2f")s")
                                 .foregroundColor(.secondary)
                         }
-                        Slider(value: $settings.baseInterval, in: 0.05...0.5, step: 0.05)
+                        Slider(value: $settings.baseInterval, in: 0.05...2.0, step: 0.05)
                     }
                     
                     VStack(alignment: .leading) {
@@ -58,7 +58,7 @@ struct SettingsView: View {
                             Text("\(settings.intensityMultiplier, specifier: "%.1f")")
                                 .foregroundColor(.secondary)
                         }
-                        Slider(value: $settings.intensityMultiplier, in: 1.0...5.0, step: 0.5)
+                        Slider(value: $settings.intensityMultiplier, in: 0.5...5.0, step: 0.5)
                     }
                 }
                 
