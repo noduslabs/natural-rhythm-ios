@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var timer: Timer?
     @State private var isPlaying = false
     @State private var isStarting = false
+    @State private var showingSettings = false
     @ObservedObject private var settings = SettingsModel.shared
     
     // Visual feedback state
@@ -23,45 +24,73 @@ struct ContentView: View {
     @State private var intervalCount = 0
     
     var body: some View {
-        NavigationView {
+        GeometryReader { geometry in
             ZStack {
-                // Visual feedback square (background layer)
+                // Visual feedback square (background layer - centered on play button)
                 if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
                     Rectangle()
                         .fill(Color.primary.opacity(1))
                         .frame(width: squareSize, height: squareSize)
+                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2 + 10)
                         .animation(.linear(duration: 0.1), value: squareSize)
                 }
                 
-                // UI content (foreground layer)
-                VStack {
-                    Text("Tap to Feel the Fractal")
-                        .font(.headline)
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom)
-                    
-                    Button(buttonText) {
-                        if isPlaying {
-                            stopHapticRhythm()
-                        } else {
-                            startHapticRhythm()
-                        }
-                    }
-                    .buttonStyle(BorderedProminentButtonStyle())
-                    .padding()
-                    
-                    NavigationLink("Settings") {
-                        SettingsView()
-                    }
-                    .buttonStyle(BorderedButtonStyle())
+                // Settings button - absolutely positioned top-right
+                Button(action: {
+                    showingSettings = true
+                }) {
+                    Image(systemName: "gearshape.fill")
+                        .font(.title3)
+                        .foregroundColor(.primary)
                 }
-                .privacySensitive(false)
-                .navigationTitle("RhythmHaptics")
-                .navigationBarTitleDisplayMode(.inline)
+                .buttonStyle(PlainButtonStyle())
+                .position(x: geometry.size.width - 20, y: 20)
+                
+                // App name - positioned above play button
+                Text("eunosoma")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                    .position(x: geometry.size.width / 2, y: geometry.size.height / 2 - 50)
+                
+                // Play button - absolutely centered
+                Button(action: {
+                    if isPlaying {
+                        stopHapticRhythm()
+                    } else {
+                        startHapticRhythm()
+                    }
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.primary)
+                            .frame(width: 60, height: 60)
+                        
+                        Image(systemName: buttonIcon)
+                            .font(.title2)
+                            .foregroundColor(.black)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                .position(x: geometry.size.width / 2, y: geometry.size.height / 2 + 10)
             }
+        }
+        .navigationBarHidden(true)
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
         }
         .onAppear {
             workoutManager.requestAuthorization { _ in }
+        }
+    }
+    
+    private var buttonIcon: String {
+        if isStarting {
+            return "record.circle.fill"
+        } else if isPlaying {
+            return "stop.fill"
+        } else {
+            return "play.fill"
         }
     }
     

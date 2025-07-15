@@ -432,6 +432,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RhythmHaptics/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Eunosoma;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,6 +464,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RhythmHaptics/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Eunosoma;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -493,7 +495,7 @@
 				DEVELOPMENT_TEAM = 23275M22RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = RhythmHapticsWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = Eunosoma;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app uses HealthKit to read workout data to enable always-on display and haptics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app uses HealthKit to keep the screen on and enable haptic feedback during your session.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -527,7 +529,7 @@
 				DEVELOPMENT_TEAM = 23275M22RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = RhythmHapticsWatch;
+				INFOPLIST_KEY_CFBundleDisplayName = Eunosoma;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app uses HealthKit to read workout data to enable always-on display and haptics.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app uses HealthKit to keep the screen on and enable haptic feedback during your session.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
