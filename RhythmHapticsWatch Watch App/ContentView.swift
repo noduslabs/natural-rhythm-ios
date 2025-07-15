@@ -17,32 +17,47 @@ struct ContentView: View {
     @State private var isStarting = false
     @ObservedObject private var settings = SettingsModel.shared
     
+    // Visual feedback state
+    @State private var squareSize: CGFloat = 0
+    @State private var isGrowing = true
+    @State private var intervalCount = 0
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Tap to Feel the Fractal")
-                    .font(.headline)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom)
-                
-                Button(buttonText) {
-                    if isPlaying {
-                        stopHapticRhythm()
-                    } else {
-                        startHapticRhythm()
+            ZStack {
+                VStack {
+                    Text("Tap to Feel the Fractal")
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom)
+                    
+                    Button(buttonText) {
+                        if isPlaying {
+                            stopHapticRhythm()
+                        } else {
+                            startHapticRhythm()
+                        }
                     }
+                    .buttonStyle(BorderedProminentButtonStyle())
+                    .padding()
+                    
+                    NavigationLink("Settings") {
+                        SettingsView()
+                    }
+                    .buttonStyle(BorderedButtonStyle())
                 }
-                .buttonStyle(BorderedProminentButtonStyle())
-                .padding()
+                .privacySensitive(false)
+                .navigationTitle("RhythmHaptics")
+                .navigationBarTitleDisplayMode(.inline)
                 
-                NavigationLink("Settings") {
-                    SettingsView()
+                // Visual feedback square
+                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
+                    Rectangle()
+                        .fill(Color.blue.opacity(0.3))
+                        .frame(width: squareSize, height: squareSize)
+                        .animation(.linear(duration: 0.1), value: squareSize)
                 }
-                .buttonStyle(BorderedButtonStyle())
             }
-            .privacySensitive(false)
-            .navigationTitle("RhythmHaptics")
-            .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
             workoutManager.requestAuthorization { _ in }
@@ -75,6 +90,11 @@ struct ContentView: View {
         
         isStarting = false
         isPlaying = true
+        
+        // Reset visual feedback state
+        squareSize = 0
+        intervalCount = 0
+        isGrowing = true
         
         let rawIntervals = generateFractalSignal(length: settings.signalLength, hurst: settings.hurstParameter)
         let intervals = rawIntervals.map { settings.baseInterval + $0 * settings.intensityMultiplier }
@@ -152,10 +172,26 @@ struct ContentView: View {
             delays.append(currentTime)
         }
         
-        // Schedule all haptics
+        // Update interval count and growing state
+        intervalCount += 1
+        isGrowing = intervalCount % 2 == 1 // Odd intervals grow, even intervals shrink
+        
+        // Calculate max screen size for watch
+        let screenSize: CGFloat = 200 // Approximate watch screen size
+        
+        // Schedule all haptics with visual feedback
         for (index, delay) in delays.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 if self.isPlaying {
+                    // Update visual feedback
+                    let progress = Double(index) / Double(delays.count - 1)
+                    if self.isGrowing {
+                        self.squareSize = CGFloat(progress) * screenSize
+                    } else {
+                        self.squareSize = CGFloat(1.0 - progress) * screenSize
+                    }
+                    
+                    // Play haptic feedback
                     if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
                         if index == 0 {
                             // First haptic uses different signal for cadence
@@ -192,5 +228,10 @@ struct ContentView: View {
         SessionManager.shared.stopSession() // Stop extended runtime session
         workoutManager.stopWorkout() // Stop workout session
         isStarting = false
+        
+        // Reset visual feedback state
+        squareSize = 0
+        intervalCount = 0
+        isGrowing = true
     }
 }

@@ -27,25 +27,40 @@ struct ContentView: View {
     @State private var customSoundID: SystemSoundID = 0
     @ObservedObject private var settings = SettingsModel.shared
     
+    // Visual feedback state
+    @State private var squareSize: CGFloat = 0
+    @State private var isGrowing = true
+    @State private var intervalCount = 0
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Tap to Feel the Fractal")
-                Button(isPlaying ? "Stop" : "Start") {
-                    if isPlaying {
-                        stopHapticRhythm()
-                    } else {
-                        playHapticRhythm()
+            ZStack {
+                VStack {
+                    Text("Tap to Feel the Fractal")
+                    Button(isPlaying ? "Stop" : "Start") {
+                        if isPlaying {
+                            stopHapticRhythm()
+                        } else {
+                            playHapticRhythm()
+                        }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            .navigationTitle("RhythmHaptics")
-            .navigationBarItems(trailing: Button("Settings") {
-                showingSettings = true
-            })
-            .sheet(isPresented: $showingSettings) {
-                SettingsView()
+                .navigationTitle("RhythmHaptics")
+                .navigationBarItems(trailing: Button("Settings") {
+                    showingSettings = true
+                })
+                .sheet(isPresented: $showingSettings) {
+                    SettingsView()
+                }
+                
+                // Visual feedback square
+                if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 && isPlaying {
+                    Rectangle()
+                        .fill(Color.blue.opacity(0.3))
+                        .frame(width: squareSize, height: squareSize)
+                        .animation(.linear(duration: 0.1), value: squareSize)
+                }
             }
         }
     }
@@ -61,6 +76,11 @@ struct ContentView: View {
         
         isPlaying = true
         UIApplication.shared.isIdleTimerDisabled = true // Keep screen on
+        
+        // Reset visual feedback state
+        squareSize = 0
+        intervalCount = 0
+        isGrowing = true
         
         let hapticStyles: [UIImpactFeedbackGenerator.FeedbackStyle] = [.light, .medium, .heavy]
         let generator = UIImpactFeedbackGenerator(style: hapticStyles[settings.hapticStyle])
@@ -120,7 +140,7 @@ struct ContentView: View {
         delays.append(0.0) // First haptic at start
         
         var currentTime = 0.0
-        let totalAvailableTime = interval * 0.8 // Use 95% of interval
+        let totalAvailableTime = interval * 0.8 // Use 80% of interval
         
         // Pre-calculate all gap sizes to ensure we fill the available time
         var gapSizes: [Double] = []
@@ -155,12 +175,28 @@ struct ContentView: View {
             delays.append(currentTime)
         }
         
+        // Update interval count and growing state
+        intervalCount += 1
+        isGrowing = intervalCount % 2 == 1 // Odd intervals grow, even intervals shrink
+        
+        // Calculate max screen size for iPhone
+        let screenSize: CGFloat = UIScreen.main.bounds.width
+        
         print("delays: \(delays.map { String(format: "%.4f", $0) }.joined(separator: ", "))")
         
-        // Schedule all haptics and sounds
+        // Schedule all haptics and sounds with visual feedback
         for (index, delay) in delays.enumerated() {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 if self.isPlaying {
+                    // Update visual feedback
+                    let progress = Double(index) / Double(delays.count - 1)
+                    if self.isGrowing {
+                        self.squareSize = CGFloat(progress) * screenSize
+                    } else {
+                        self.squareSize = CGFloat(1.0 - progress) * screenSize
+                    }
+                    
+                    // Play haptic feedback
                     if settings.extendedHapticFeedback && settings.intensityMultiplier >= 1.0 {
                         if index == 0 {
                             generatorExtendedCadence.impactOccurred()
@@ -174,7 +210,6 @@ struct ContentView: View {
                         generator.impactOccurred()
                         self.playSelectedSound()
                     }
-                    
                 }
             }
         }
@@ -207,5 +242,10 @@ struct ContentView: View {
             AudioServicesDisposeSystemSoundID(customSoundID)
             customSoundID = 0
         }
+        
+        // Reset visual feedback state
+        squareSize = 0
+        intervalCount = 0
+        isGrowing = true
     }
 }
