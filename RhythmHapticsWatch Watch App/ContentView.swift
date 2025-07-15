@@ -89,13 +89,26 @@ struct ContentView: View {
                 let expectedTime = intervals.prefix(currentIndex).reduce(0, +)
                 
                 if elapsed >= expectedTime {
-                    WKInterfaceDevice.current().play(.start) // success is double but nice, failure is longer vibration
+                    playSelectedSignal()
                     currentIndex += 1
                 }
             } else {
                 // All haptics completed
                 stopHapticRhythm()
             }
+        }
+    }
+    
+    func playSelectedSignal() {
+        switch settings.signalType {
+        case 0: // Start
+            WKInterfaceDevice.current().play(.start)
+        case 1: // Success
+            WKInterfaceDevice.current().play(.success)
+        case 2: // Failure
+            WKInterfaceDevice.current().play(.failure)
+        default:
+            WKInterfaceDevice.current().play(.start)
         }
     }
     

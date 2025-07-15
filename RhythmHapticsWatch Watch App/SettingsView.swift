@@ -68,6 +68,33 @@ struct SettingsView: View {
                 }
             }
             
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Signal: \(["Start", "Success", "Failure"][settings.signalType])")
+                    .font(.caption)
+                HStack {
+                    Button("Start") {
+                        settings.signalType = 0
+                    }
+                    .buttonStyle(.bordered)
+                    .background(settings.signalType == 0 ? Color.accentColor : Color.clear)
+                    .font(.caption2)
+                    
+                    Button("Success") {
+                        settings.signalType = 1
+                    }
+                    .buttonStyle(.bordered)
+                    .background(settings.signalType == 1 ? Color.accentColor : Color.clear)
+                    .font(.caption2)
+                    
+                    Button("Failure") {
+                        settings.signalType = 2
+                    }
+                    .buttonStyle(.bordered)
+                    .background(settings.signalType == 2 ? Color.accentColor : Color.clear)
+                    .font(.caption2)
+                }
+            }
+            
             Button("Done") {
                 dismiss()
             }
